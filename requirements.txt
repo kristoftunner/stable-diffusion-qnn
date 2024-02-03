@@ -1,0 +1,6 @@
+jax
+ftfy
+torchinfo
+https://github.com/quic/aimet/releases/download/1.25.0/AimetCommon-torch_gpu_1.25.0-cp38-cp38-linux_x86_64.whl
+https://github.com/quic/aimet/releases/download/1.25.0/AimetTorch-torch_gpu_1.25.0-cp38-cp38-linux_x86_64.whl
+diffusers==0.10.2

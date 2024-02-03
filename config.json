@@ -1,0 +1,22 @@
+{
+  "activation_bit_width": 16,
+  "apply_adaround": false,
+  "calibration_prompts": "calibration_prompts.txt",
+  "config_file": null,
+  "gn_exceptions": true,
+  "half_precision": false,
+  "in_place": true,
+  "parameter_bit_width": 8,
+  "quant_scheme": "tf",
+  "remove_quantsim_after_inference": true,
+  "replace_attn_singlehead_conv": true,
+  "silu_sigmoid_encoding_override": true,
+  "softmax_encoding_override": true,
+  "text_encoder_exception_type": "text_encoder_attn_q=16_k=8_sm=8_v=16_as=16",
+  "unet_exception_type": "UNET_attn_q=16_k=8_sm=16_v=8_as=16",
+  "use_asymmetric_layernorm_weights": true,
+  "use_symmetric_matmul": true,
+  "vae_exception_type": "VAE_attn_q=16_k=8_sm=16_v=8_as=16",
+  "apply_adaround_text_encoder": true,
+  "adaround_iter_text_encoder": 10000
+}

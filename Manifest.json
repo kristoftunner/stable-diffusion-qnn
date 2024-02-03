@@ -1,0 +1,23 @@
+{
+  "zipentries" : ["stable_diffusion.ipynb",
+				  "images/*.*",
+				  "redefined_modules/*.*",
+				  "aimet_quantsim.py", 
+				  "Apache 2.0.txt", 
+				  "calibration_prompts.txt",
+				  "check-dump.py",
+				  "config.json",
+				  "CreativeML OpenRail-M.txt",
+				  "exceptions.py",
+				  "launch.sh",
+				  "LICENSE.pdf",
+				  "Manifest.json",
+				  "notebook_main.py",
+				  "NOTICE.txt",
+				  "requirements.txt",
+				  "stable_diff_pipeline.py",
+				  "text_encoder.py",
+				  "unet.py",
+				  "vae_encoder.py"]
+}
+
