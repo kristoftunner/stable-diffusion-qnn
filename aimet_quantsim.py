@@ -80,14 +80,14 @@ def export_quantsim_model(qsim, output_path, dummy_input, filename_prefix, verbo
 def export_text_encoder(model, tokens):
     print("Exporting Text Encoder ----")
     dummy_input = tokens[0][0].to(model.model.device)
-    export_quantsim_model(model, '_exports_/text_encoder_onnx', dummy_input, 'text_encoder',
+    export_quantsim_model(model, '_exports_/text_encoder/onnx', dummy_input, 'text_encoder',
                           input_names=['input_1'], output_names=['output_1'])
 
 
 def export_unet(model, embeddings):
     print("Exporting UNET ----")
     dummy_input = unet_dummy_input(model.model, embeddings)
-    export_quantsim_model(model, '_exports_/unet_onnx', dummy_input, 'unet',
+    export_quantsim_model(model, '_exports_/unet/onnx', dummy_input, 'unet',
                           use_external_data_format=True,
                           input_names=['input_1', 'input_2', 'input_3'], output_names=['output_1'])
 
@@ -95,7 +95,7 @@ def export_unet(model, embeddings):
 def export_vae(model, latents):
     print("Exporting VAE ----")
     dummy_input = latents[0]
-    export_quantsim_model(model, '_exports_/vae_decoder_onnx', dummy_input, 'vae_decoder',
+    export_quantsim_model(model, '_exports_/vae_decoder/onnx', dummy_input, 'vae_decoder',
                           input_names=['input_1'], output_names=['output_1'])
 
 

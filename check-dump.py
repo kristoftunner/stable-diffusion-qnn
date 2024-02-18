@@ -25,6 +25,7 @@
 
 import numpy as np
 
+
 def sqnr(signal, noisy, eps=1e-10):
     noise = signal - noisy
     exp_noise = (noise ** 2).mean() + eps
@@ -34,15 +35,13 @@ def sqnr(signal, noisy, eps=1e-10):
     return sqnr_db
 
 
-
-before = np.load('_exports_/fp32.npy', allow_pickle=True)
-after = np.load('_exports_/int8.npy', allow_pickle=True)
-keys = ['text_embeddings', 'latent', 'img']
-
-print(','.join(keys))
-for i, (b, a) in enumerate(zip(before, after)):
-    print(','.join([str(sqnr(a[key], b[key])) for key in keys]))
-
+# before = np.load('_exports_/fp32.npy', allow_pickle=True)
+# after = np.load('_exports_/int8.npy', allow_pickle=True)
+# keys = ['text_embeddings', 'latent', 'img']
+#
+# print(','.join(keys))
+# for i, (b, a) in enumerate(zip(before, after)):
+#    print(','.join([str(sqnr(a[key], b[key])) for key in keys]))
 
 src = np.load('_exports_/fp32.npy', allow_pickle=True)
 outdir = '_exports_'
@@ -55,12 +54,12 @@ with open('te_input_list.txt', 'wt') as input_list:
 
 with open('unet_input_list.txt', 'wt') as input_list:
     for i, (latent, time_emb, hidden) in enumerate(src[0]['unet_inputs']):
-        latent.transpose(0,2,3,1).tofile(f'{outdir}/unet_input_{i+1}_1.bin')
+        latent.transpose(0, 2, 3, 1).tofile(f'{outdir}/unet_input_{i+1}_1.bin')
         time_emb.tofile(f'{outdir}/unet_input_{i+1}_2.bin')
         hidden.tofile(f'{outdir}/unet_input_{i+1}_3.bin')
         print(f'{outdir}/unet_input_{i+1}_1.bin {outdir}/unet_input_{i+1}_2.bin {outdir}/unet_input_{i+1}_3.bin', file=input_list)
 
 with open('vae_input_list.txt', 'wt') as input_list:
     vae_iputs = src[0]['latent']
-    vae_iputs.transpose(0,2,3,1).tofile(f'{outdir}/vae_input_1.bin')
+    vae_iputs.transpose(0, 2, 3, 1).tofile(f'{outdir}/vae_input_1.bin')
     print(f'{outdir}/vae_input_1.bin', file=input_list)

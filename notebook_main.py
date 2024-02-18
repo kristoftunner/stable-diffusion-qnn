@@ -103,7 +103,7 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
 
     script_config = {
-        'runFloatPipeline': False,
+        'runFloatPipeline': True,
         'textEncoder': {
             'quantize': False,
             'embeddingsOutputFolder': '_exports_/embeddings',
@@ -114,7 +114,7 @@ if __name__ == '__main__':
             'latentsOutputFolder': '_exports_/latents',
         },
         'vae': {
-            'quantize': True,
+            'quantize': False,
             'latentsInputFolder': '_exports_/latents',
         },
     }
