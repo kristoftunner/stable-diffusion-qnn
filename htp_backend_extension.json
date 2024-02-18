@@ -1,0 +1,6 @@
+{
+    "backend_extensions": {
+        "shared_library_path": "/opt/qcom/aistack/qnn/2.19.2.240210/lib/x86_64-linux-clang/libQnnHtpNetRunExtensions.so",
+        "config_file_path": "htp_backend_config.json"
+    }
+}
