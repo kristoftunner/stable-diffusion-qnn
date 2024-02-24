@@ -53,7 +53,7 @@ def run_scheduler(scheduler, noise_pred_uncond, noise_pred_text, latent_in, time
     return latent_out
 
 
-def run_qnn_net_run(qnn_net_run, model_context, input_data_list):
+def run_qnn_net_run(model_context, input_data_list):
     # Define tmp directory path for intermediate artifacts
     tmp_dirpath = os.path.abspath('tmp')
     os.makedirs(tmp_dirpath, exist_ok=True)

@@ -46,9 +46,16 @@ if __name__ == '__main__':
     uncond_tokens = run_tokenizer(tokenizer, "")
     cond_tokens = run_tokenizer(tokenizer, user_prompt)
 
+    # model paths
+    def create_model_path(
+        model_name): return f'_exports_/{model_name}/qnn/converted_{model_name}/x86_64-linux-clang/serialized_binaries/{model_name}.serialized.bin'
+    text_encoder_path = create_model_path('text_encoder')
+    vae_model_path = create_model_path('vae_encoder')
+    unet_model_path = create_model_path('unet')
+
     # Run Text Encoder on Tokens
-    uncond_text_embedding = run_text_encoder(uncond_tokens)
-    user_text_embedding = run_text_encoder(cond_tokens)
+    uncond_text_embedding = run_text_encoder(text_encoder_path, uncond_tokens)
+    user_text_embedding = run_text_encoder(text_encoder_path, cond_tokens)
 
     # Initialize the latent input with random initial latent
     random_init_latent = torch.randn(
@@ -63,12 +70,12 @@ if __name__ == '__main__':
         timestep = get_timestep(step, scheduler)
 
         # Run U-net for const embeddings
-        unconditional_noise_pred = run_unet(
-            latent_in, get_time_embedding(timestep), uncond_text_embedding)
+        unconditional_noise_pred = run_unet(unet_model_path,
+                                            latent_in, get_time_embedding(timestep), uncond_text_embedding)
 
         # Run U-net for user text embeddings
-        conditional_noise_pred = run_unet(
-            latent_in, get_time_embedding(timestep), user_text_embedding)
+        conditional_noise_pred = run_unet(unet_model_path,
+                                          latent_in, get_time_embedding(timestep), user_text_embedding)
 
         # Run Scheduler
         latent_in = run_scheduler(
