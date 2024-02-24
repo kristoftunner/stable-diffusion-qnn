@@ -43,8 +43,8 @@ if __name__ == '__main__':
     tokenizer = create_tokenizer(77)
     scheduler = create_scheduler(user_step)
 
-    uncond_tokens = run_tokenizer("")
-    cond_tokens = run_tokenizer(user_prompt)
+    uncond_tokens = run_tokenizer(tokenizer, "")
+    cond_tokens = run_tokenizer(tokenizer, user_prompt)
 
     # Run Text Encoder on Tokens
     uncond_text_embedding = run_text_encoder(uncond_tokens)

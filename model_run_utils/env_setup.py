@@ -13,7 +13,8 @@ def setup_env() -> os.path:
         SDK_dir,  "lib/hexagon-v68/unsigned/libQnnHtpV68Skel.so")
 
     bin_dir = os.path.join(os.getcwd(), 'bin')
-    os.mkdir(bin_dir)
+    if not os.path.exists(bin_dir):
+        os.mkdir(bin_dir)
 
     # Copy necessary libraries to a common location
     libs = ["QnnHtp.dll", "QnnHtpNetRunExtensions.dll",
@@ -31,7 +32,7 @@ def setup_env() -> os.path:
 def check_user_inputs(user_seed, user_step, user_text_guidance):
     if not isinstance(user_step, int):
         raise ValueError("user_step should be of int type")
-    if user_step != 20 or user_step != 50:
+    if (user_step != 20) and (user_step != 50):
         raise ValueError("user_step should be either 20 or 50")
     if not isinstance(user_seed, np.int64):
         raise ValueError("user_seed is not int64")
