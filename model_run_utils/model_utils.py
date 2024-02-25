@@ -2,6 +2,7 @@ import shutil
 import os
 import torch
 import numpy as np
+import logging
 from tokenizers import Tokenizer
 from diffusers import DPMSolverMultistepScheduler
 import subprocess
@@ -55,7 +56,8 @@ def run_scheduler(scheduler, noise_pred_uncond, noise_pred_text, latent_in, time
 
 def run_qnn_net_run(model_context, input_data_list):
     # Define tmp directory path for intermediate artifacts
-    tmp_dirpath = os.path.abspath('tmp')
+    tmp_dirpath = os.path.abspath(
+        f'_tmp_/{os.path.splitext(os.path.basename(model_context))[0]}')
     os.makedirs(tmp_dirpath, exist_ok=True)
 
     # Dump each input data from input_data_list as raw file
@@ -75,19 +77,19 @@ def run_qnn_net_run(model_context, input_data_list):
     net_run_binary = os.path.join(
         SDK_dir, 'bin/aarch64-windows-msvc/qnn-net-run.exe')
 
-    cmd = [f'{net_run_binary}', '--retreive_context', 'f{model_context}', '--backend',
+    cmd = [f'{net_run_binary}', '--retrieve_context', f'{model_context}', '--backend',
            'bin/QnnHtp.dll', '--input_list', f'{input_list_filepath}', '--output_dir', f'{tmp_dirpath}']
 
+    logging.info(f'Calling subprocess with: {cmd}')
     ret = subprocess.run(cmd, capture_output=False, text=True)
 
-    if ret != 0:
+    if ret.returncode != 0:
         raise ValueError(f'qnn_net_run failed for {model_context}')
 
     output_data = np.fromfile(
         f'{tmp_dirpath}/Result_0/output_1.raw', dtype=np.float32)
 
-    # cleanup
-    shutil.rmtree(tmp_dirpath)
+    # shutil.rmtree(tmp_dirpath)
     return output_data
 
 

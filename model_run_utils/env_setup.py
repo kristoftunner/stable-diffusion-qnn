@@ -12,7 +12,7 @@ def setup_env() -> os.path:
     skel_file = os.path.join(
         SDK_dir,  "lib/hexagon-v68/unsigned/libQnnHtpV68Skel.so")
 
-    bin_dir = os.path.join(os.getcwd(), 'bin')
+    bin_dir = os.path.join(os.getcwd(), '_bin_')
     if not os.path.exists(bin_dir):
         os.mkdir(bin_dir)
 
