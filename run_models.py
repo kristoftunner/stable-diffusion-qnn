@@ -21,6 +21,8 @@ def get_timestep(step, scheduler):
     return np.int32(scheduler.timesteps.numpy()[step])
 
 
+
+
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     net_run_binary = setup_env()

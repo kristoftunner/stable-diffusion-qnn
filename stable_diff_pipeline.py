@@ -24,6 +24,7 @@
 # ==============================================================================
 
 import torch
+import logging
 import numpy
 from PIL import Image
 from diffusers import DPMSolverMultistepScheduler
@@ -97,9 +98,11 @@ def save_image(img, name):
 def run_the_pipeline(prompts, unet, text_encoder, vae, tokenizer, test_name, seed=1.36477711e+14):
 
     prompts = [prompts] if isinstance(prompts, str) else prompts
+    img = None
     with torch.no_grad():
         dump, unet_inputs = [], []
         for i, prompt in enumerate(prompts):
+            logging.info(f'Running the pipeline for the {i}th time')
             text_input, uncond_input = run_tokenizer(tokenizer, prompt)
             cond_embeddings= run_text_encoder(text_encoder, text_input)
             uncond_embeddings= run_text_encoder(text_encoder, uncond_input)

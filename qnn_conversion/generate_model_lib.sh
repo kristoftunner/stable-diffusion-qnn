@@ -1,7 +1,6 @@
 source setup_env.sh
 
 workspace="_exports_"
-models=("text_encoder" "unet" "vae_decoder")
 
 generate_model_lib(){
     echo "------------------------------------"
